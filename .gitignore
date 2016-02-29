@@ -6,6 +6,8 @@
 *.qm
 *.sdf
 *.sln
+*.VC.opendb
+
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user

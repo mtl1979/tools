@@ -13,21 +13,29 @@
 int main(int argc, char* argv[])
 {
 	QCoreApplication app(argc, argv);
+	wchar_t warg[255];
+	int len;
 	if (app.arguments().count() != 3)
 	{
-		printf("Usage: %S input output\n", app.arguments().at(0).utf16());
+		len = app.arguments().at(0).toWCharArray(warg);
+		warg[len] = 0;
+		printf("Usage: %S input output\n", warg);
 		return -1;
 	}
 
 	QFile fIn(app.arguments().at(1)), fOut(app.arguments().at(2));
 	if (fIn.open(QIODevice::ReadOnly) == false)
 	{
-		printf("Error opening input file %S!",app.arguments().at(1).utf16());
+		len = app.arguments().at(1).toWCharArray(warg);
+		warg[len] = 0;
+		printf("Error opening input file %S!", warg);
 		return -1;
 	}
 	if (fOut.open(QIODevice::WriteOnly) == false)
 	{
-		printf("Error opening output file %S!",app.arguments().at(2).utf16());
+		len = app.arguments().at(2).toWCharArray(warg);
+		warg[len] = 0;
+		printf("Error opening output file %S!", warg);
 		fIn.close();
 		return -1;
 	}
